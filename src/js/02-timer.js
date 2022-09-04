@@ -41,7 +41,6 @@ function checkAndCall(timerValue) {
   btn.disabled = false;
 
   let timeData = convertMs(timerValue);
-  writeData(timeData);
 
   btn.addEventListener('click', () => {
     btn.disabled = true;
@@ -52,7 +51,8 @@ function checkAndCall(timerValue) {
 function countDown(timeData, int) {
   timeData = convertMs((timerValue -= 1000));
   writeData(timeData);
-  if (timerValue < 1000) {
+  console.log(timerValue);
+  if (timerValue <= 1000) {
     clearInterval(int);
   }
 }
