@@ -10,18 +10,17 @@ form.addEventListener('submit', submitPromises);
 
 function submitPromises(e) {
   e.preventDefault();
+  let delayValue = firstDelay.valueAsNumber;
 
-  let delayValue = firstDelay.value;
-
-  for (let i = 1; i <= amount.value; i += 1) {
+  for (let i = 1; i <= amount.valueAsNumber; i += 1) {
     createPromise(i, delayValue)
-      .then(({ position, delay }) => {
+      .then(delay => {
         Notiflix.Notify.success(`✅ Fulfilled promise ${i} in ${delay}ms`);
       })
-      .catch(({ position, delay }) => {
+      .catch(delay => {
         Notiflix.Notify.failure(`❌ Rejected promise ${i} in ${delay}ms`);
       });
-    delayValue += step.value;
+    delayValue += step.valueAsNumber;
   }
 }
 
