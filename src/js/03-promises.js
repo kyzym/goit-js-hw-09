@@ -2,6 +2,7 @@ import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import 'notiflix/dist/notiflix-3.2.5.min.css';
 
 const form = document.querySelector('.form');
+
 const firstDelay = document.querySelector('[name="delay"]');
 const step = document.querySelector('[name="step"]');
 const amount = document.querySelector('[name="amount"]');
@@ -10,17 +11,18 @@ form.addEventListener('submit', submitPromises);
 
 function submitPromises(e) {
   e.preventDefault();
-  let delayValue = firstDelay.valueAsNumber;
+
+  let delay = firstDelay.valueAsNumber;
 
   for (let i = 1; i <= amount.valueAsNumber; i += 1) {
-    createPromise(i, delayValue)
-      .then(delay => {
+    createPromise(i, delay)
+      .then(({ position, delay }) => {
         Notify.success(`✅ Fulfilled promise ${i} in ${delay}ms`);
       })
-      .catch(delay => {
+      .catch(({ position, delay }) => {
         Notify.failure(`❌ Rejected promise ${i} in ${delay}ms`);
       });
-    delayValue += step.valueAsNumber;
+    delay += step.valueAsNumber;
   }
 }
 

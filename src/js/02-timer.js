@@ -60,10 +60,10 @@ function countDown(timeData, int) {
 function writeData(timeData) {
   for (let key in timeData) {
     let timeValue = timeData[key];
-    if (timeValue < 10) {
-      timeValue = String(timeValue).padStart(2, 0);
-      addLeadingZero(timeValue);
-    }
+
+    timeValue = String(timeValue).padStart(2, 0);
+    addLeadingZero(timeValue);
+
     document.querySelector(`[data-${key}]`).textContent = timeValue;
   }
 }
